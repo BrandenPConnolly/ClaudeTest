@@ -3,8 +3,8 @@
 ## Repository Overview
 
 **Repository**: BrandenPConnolly/ClaudeTest
-**Purpose**: Test repository for AI-assisted development workflows
-**Current Status**: Initial setup
+**Purpose**: Terminal Task Battle - A gamified Pomodoro/task manager
+**Current Status**: Fully functional CLI game with RPG elements
 
 ## Table of Contents
 
@@ -23,23 +23,24 @@
 
 ```
 ClaudeTest/
-├── .git/              # Git version control
-└── CLAUDE.md          # This file
-```
-
-### Expected Structure (as project grows)
-
-```
-ClaudeTest/
-├── src/               # Source code
-├── tests/             # Test files
-├── docs/              # Documentation
-├── .github/           # GitHub workflows and configurations
-├── config/            # Configuration files
-├── scripts/           # Utility scripts
-├── package.json       # Node.js dependencies (if applicable)
-├── README.md          # Project documentation
-└── CLAUDE.md          # AI assistant guide
+├── src/
+│   ├── models/
+│   │   ├── Character.js      # Character stats, leveling, achievements
+│   │   ├── Task.js           # Task model with difficulty levels
+│   │   └── GameState.js      # Game state management & persistence
+│   ├── ui/
+│   │   ├── display.js        # Terminal UI rendering functions
+│   │   └── menu.js           # Interactive CLI menus
+│   ├── utils/
+│   │   └── pomodoro.js       # Pomodoro timer implementation
+│   └── index.js              # Main application entry point
+├── .git/                     # Git version control
+├── .gitignore                # Git ignore rules
+├── package.json              # Node.js dependencies & scripts
+├── package-lock.json         # Locked dependency versions
+├── test.js                   # Model validation tests
+├── README.md                 # User documentation
+└── CLAUDE.md                 # AI assistant guide (this file)
 ```
 
 ---
@@ -282,19 +283,55 @@ When reviewing code:
 
 ### Technology Stack
 
-*To be determined as project develops*
+- **Runtime**: Node.js (ES Modules)
+- **Language**: JavaScript
+- **Type**: CLI Application / Terminal Game
 
 ### Key Dependencies
 
-*To be added as dependencies are introduced*
+- **chalk** (5.3.0) - Terminal colors and styling
+- **inquirer** (9.2.12) - Interactive command-line prompts
+- **boxen** (7.1.1) - Terminal boxes and borders
+- **figlet** (1.7.0) - ASCII art text generation
+- **gradient-string** (2.0.2) - Color gradients for text
+- **cli-progress** (3.12.0) - Progress bars
 
 ### Environment Setup
 
-*To be documented as project requirements emerge*
+```bash
+# Install dependencies
+npm install
+
+# Run the game
+npm start
+
+# Run in development mode (with auto-reload)
+npm run dev
+
+# Run tests
+node test.js
+```
 
 ### Testing Strategy
 
-*To be defined as testing framework is chosen*
+- **Model Tests**: `test.js` validates core game logic
+- Tests cover: Character leveling, Task management, Game state, Serialization
+- All models include `toJSON()` and `fromJSON()` for save/load functionality
+- Manual testing for interactive CLI features
+
+### Architecture Notes
+
+**Design Patterns:**
+- **MVC-inspired**: Models (Character, Task, GameState), Views (UI display functions), Controller (main game loop)
+- **State Management**: Centralized in GameState class
+- **Persistence**: JSON file-based save system
+- **Event-Driven**: Timer-based updates for Pomodoro
+
+**Key Files to Understand:**
+1. `src/models/GameState.js` - Central game state manager (line 1-200)
+2. `src/index.js` - Main game loop and action handlers (line 1-250)
+3. `src/models/Character.js` - XP and leveling system (line 1-80)
+4. `src/ui/display.js` - All terminal rendering logic (line 1-230)
 
 ---
 
@@ -322,5 +359,5 @@ AI assistants should suggest updates to this document when they notice it's out 
 ---
 
 **Last Updated**: 2026-01-05
-**Version**: 1.0.0
+**Version**: 2.0.0 (Terminal Task Battle Complete)
 **Maintained by**: AI Assistant (Claude)
